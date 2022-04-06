@@ -42,6 +42,10 @@ RSpec.describe 'Requests::PostsController', type: :request do
       expect(response).to render_template(:show)
     end
 
+    it 'responds with the correct text' do
+      expect(response.body).to include('Post#show')
+    end
+
     it 'responds with a 200 status code' do
       expect(response).to have_http_status(200)
     end
