@@ -1,42 +1,47 @@
-<div>
-
-
-  <ul>
-      <div>
-            <img src="<%= @user.photo %>" class="rounded float-start rounded border img-thumbnail" width = "150px" height = "150px" alt="User image">
-        </div>
-        <div class="border border-2 border-dark container mt-5 p-6">
-        <h2> <%= @user.name %> </h2>
-        <p class="float ">posts: <%= @user.posts.length %> </p>
+<h2 class='heading'> Post interactions for a given user </h2>
+<div class='all-posts-body'>
+    <div class='u-detail-top'>
+        <div class='u-d-img'>
+             <img src="<%= @user.photo %>" class="rounded float-start rounded border img-thumbnail" width = "150px" alt="User image">
         </div>
         
-    <% @user.posts.each do |p| %>
-     
-      <br>
-      <br>
-      <br>
-        <div class="border border-3 border-dark container mt-5 p-2 bio">
-          <%= link_to user_post_path(@user.id, p.id), id: "user_post#{p.id}" do %>
-          <h4><%= p.title%></h4>
-          <% end %>
-          <p><%= p.text%></p>
-          <div>
-            <span>Comments: <%= p.comments.size %></span>
-            
-          </div>
+        <div class='u-detail-user'>
+            <h1 class='u-detail-user-name'>
+                <%= @user.name  %>
+            </h1>
+            <p class='u-detail-user-counter'>
+                Number of posts: <%= @user.posts_counter %>
+            </p>
         </div>
-        <div>
-        <% unless p.comments.empty? %>
-          <ul class="border border-3 border-dark container p-2 mt-1 bio">
-            <% p.recent_comments.each do |c| %>
-            <li><%= c.author.name %>: <%= c.text%></li>
-            <% end %>
-          </ul>
+    </div>
+
+    <div class='u-detail-rec-posts'>
+        <% @posts.each  do |post| %>
+            <div class='u-detail-rec-posts-card'>
+                <h2>
+                    <%= link_to "#{post.title}", user_post_path(@user.id, post.id), class: 'post-link' %>
+                </h2>
+                <p>
+                    <%= post.text %>
+                </p>
+
+                <div class='com-lik-counters'>
+                    <p>Comments: <%= post.comments_counter %></p>
+                    <p>Likes: <%= post.likes_counter %></p>
+                </div>
+            </div>
+
+            <div class='post-comments'>
+                <% post.show_recent_5_comments.each do |comment| %>
+                    <h3>
+                        <%= @user.name %>: <%= comment.text  %>
+                    </h3>
+                <% end %>
+            </div>
         <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-  <br>
-  <button class="btn btn-primary">Pagination</button>
+
+        <button class='pagination-btn'>
+            Pagination
+        </button>
+    </div>
 </div>
