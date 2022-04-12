@@ -1,1 +1,44 @@
-<h1>User#show</h1>
+
+
+<div>
+    <div class="mr-5 block mt-2">
+        <img src="<%= @user.photo %>" class="rounded float-start rounded border img-thumbnail" style="width: 150px" alt="User image">
+     </div>
+          <div class="ml-5 w-100 px-5">
+        <h2 class="text-secondary text-muted"><%= @user.name %></h2>
+             <% if @user.posts_counter %>
+            <p class="float ">posts: <%= @user.posts.length %> </p>
+            <% else %>
+            <p class="float-right text-end text-muted margin-right:150px">Number of posts: 0 </p>
+            <% end %>
+        <div>
+         <div class="card mb-3">
+            <h4>Bio</h4>
+         <p ><%= @user.bio%></p>
+         </div>
+
+        <% @user.recent_posts.each do |p|%>
+
+        <div class="card mb-3">
+            <div class="card-body">
+            <%= link_to user_post_path(@user.id, p.id), id: "user_post#{p.id}" do %>
+                <h5 class="card-title"><%= p.title %></h5>
+                <%end%>
+                <p class="card-text"><%= p.text %></p>
+                <p class="card-text">Comments: <%= p.comments_counter %></p>
+            </div>
+        </div>
+        <%end%>
+    </div>
+
+    <%= link_to "All posts", user_posts_path(@user.id)%>
+      
+
+      
+ 
+</div>
+
+
+ 
+
+
