@@ -1,1 +1,15 @@
-<h1>User#index</h1>
+<h2 class='heading'> Here is a list of Users</h2>
+<% @user.each do |user| %>
+    <div class='user-card'>
+        <div class='u-img'>
+            <img src="<%= user.photo %>" class="rounded float-start rounded border img-thumbnail" width = "150px" alt="User image">
+        </div>
+        <div class ='counter-col'>
+            <%= link_to user_path(user.id) do %>
+                <h1 class='user-name'><%= user.name %></h1>
+            <% end %>
+            <p class='u-posts-counter'>Number of posts: <%=  user.posts_counter  %></p>     
+        </div>    
+    </div>   
+
+<%end%>

@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:comments)
+    @user = User.includes(:posts).find(params[:user_id])
   end
 
   def new
@@ -9,7 +8,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @user = @user = User.find(params[:user_id])
+    @post = @user.posts.includes(:comments).find(params[:id])
   end
 
   def create
@@ -24,6 +24,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :title, :text)
+    params.require(:post).permit(:title, :text)
   end
 end
