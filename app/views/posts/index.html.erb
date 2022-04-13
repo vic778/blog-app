@@ -20,6 +20,7 @@
           <p><%= p.text%></p>
           <div>
             <span>Comments: <%= p.comments.size %></span>
+            <span>Comments: <%=p.likes_counter%></span>
             
           </div>
         </div>
@@ -35,6 +36,7 @@
       </li>
     <% end %>
   </ul>
+    <%= link_to "Add New Post", new_user_post_path(@user) %>
   <br>
   <button class="btn btn-primary">Pagination</button>
 </div>
