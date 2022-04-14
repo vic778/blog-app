@@ -3,7 +3,7 @@
     <div class="border border-3 border-dark container p-2 my-5 bio">
       <div class="d-flex justify-content-between my-3">
         <h4><%= @post.title %> by <%= @user.name %></h4>
-        <p>Comments : <%= @post.comments.size%> Likes :</p>
+        <p>Comments : <%= @post.comments.size%> Likes : <%=@post.likes_counter%> </p>
         
       </div>
       <p><%= @post.text %> </p>
@@ -12,10 +12,10 @@
     <div class="border border-3 border-dark container p-2 my-5 bio">
     <% @post.recent_comments.each do |c| %>
             <li><%= c.author.name %>: <%= c.text%></li>
-            <% end %>
+    <% end %>
     </div>
 
-    
-
-   
+  <div>
+    <%= render "comments/form" %>
+  </div>
 </div>
