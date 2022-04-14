@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: :author_id
 
   validates :name, presence: true, allow_blank: false
-  validates :bio, presence :true, allow_blank: false 
+  validates :bio, allow_blank: false
   validates :posts_counter, numericality: { only_integer: true, greater_than: -1 }
 
   def recent_posts
