@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @post = @user.posts.order(created_at: :desc)
+    @post = @user.posts.order(created_at: :desc).includes(:comments, :likes)
   end
 
   def new
@@ -10,17 +10,15 @@ class PostsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @post = @user.posts.find(params[:id])
-    @comments = @post.comments.all
-    @likes = @post.likes.all
+    @post = @user.posts.includes(:comments, :likes).find(params[:id])
   end
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to user_posts_url(current_user, @posts)
+      redirect_to user_posts_url(current_user, @posts), notifies: 'Post was successfully created.'
     else
-      render 'new'
+      render 'new', alert: 'Post was not created.'
     end
   end
 
