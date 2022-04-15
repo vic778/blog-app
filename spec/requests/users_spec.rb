@@ -11,7 +11,7 @@ RSpec.describe 'Requests::UsersController', type: :request do
     end
 
     it 'responds with the correct text' do
-      expect(response.body).to include('User#index')
+      expect(response.body).to include('Here is a list of Users')
     end
 
     it ' has the right response status' do
@@ -29,7 +29,7 @@ RSpec.describe 'Requests::UsersController', type: :request do
     end
 
     it 'responds with the correct text' do
-      expect(response.body).to include('User#show')
+      expect(response.body).to include('Profile of user number')
     end
 
     it ' has the right response status' do
