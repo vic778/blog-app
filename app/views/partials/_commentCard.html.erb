@@ -1,0 +1,17 @@
+<div class="relative border-2 w-full my-3 px-3 pt-3 pb-5">
+    <ul>
+        <% comments.each_with_index do |comment,index| %>
+            <li>
+                <span>
+                    <%= "#{comment.author.name}:" %>
+                </span>
+                <span>
+                    <%= comment.text %>
+                </span>
+                <span>
+                    <%= index + 1 %>
+                </span>
+            </li>
+        <% end %>
+    </ul>
+</div>

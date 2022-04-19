@@ -77,3 +77,6 @@ group :test do
 end
 
 gem 'devise'
+gem 'image_magick', '~> 0.1.9'
+gem 'mini_magick'
+gem 'tailwindcss-rails', '~> 2.0'

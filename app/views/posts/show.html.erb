@@ -1,22 +1,59 @@
-<h1>Here are the particular post</h1>
-<div>
-  <div>
-    <div class="border border-3 border-dark container p-2 my-5 bio">
-      <div class="d-flex justify-content-between my-3">
-        <h4><%= @post.title %> by <%= @user.name %></h4>
-        <p>Comments : <%= @post.comments.size%> Likes : <%=@post.likes_counter%> </p>
-        
-      </div>
-      <p><%= @post.text %> </p>
-   
-    </div>
-    <div class="border border-3 border-dark container p-2 my-5 bio">
-    <% @post.recent_comments.each do |c| %>
-            <li><%= c.author.name %>: <%= c.text%></li>
-    <% end %>
-    </div>
 
-  <div>
-    <%= render "comments/create" %>
-  </div>
+<div class="w-full">
+    <div class="relative border-2 w-full my-3 px-3 pt-3 pb-5">
+        <div class="flex justify-between">
+            <h1 class="text-xl font-medium">
+                <%= "#{@post.title} by #{@author.name}" %>
+            </h1>
+            <div class="text-xl font-medium">
+                <small>
+                    <%= "comments: #{@post.comments_counter || 0}" %>
+                </small>
+                <small class="ml-2">
+                    <%= "Likes: #{@post.likes_counter || 0}" %>
+                </small>
+            </div>
+        </div>
+        <p class="mt-5">
+            <%= @post.text %>
+        </p>
+    </div>
+    <div class="w-full mt-5 mb-7">
+        <div class="flex justify-end">
+            <%= form_with model: @like, url: user_post_likes_path(user_id: current_user.id, post_id: @post.id) do |form| %>
+                <div>
+                    <%= form.hidden_field :author_id, value: current_user.id %>
+                </div>
+                <div>
+                    <%= form.hidden_field :post_id, value: @post.id %>
+                </div>
+                <span class="border-2 py-2 px-4">
+                    <%= form.submit 'Like' %>
+                </span>
+            <% end %>
+        </div>
+    </div>
+    <div class="mb-5">
+        <%= render partial: "partials/commentCard", locals:{ comments: @comments } %>
+    </div>
+    <div class="">
+        <%= form_with model: @comment, url: "/users/#{current_user.id}/posts/#{@post.id}/comments", scope: :comment do |form| %>
+            <div>
+                <%= form.hidden_field :author_id, value: current_user.id %>
+            </div>
+            <div>
+                <%= form.hidden_field :post_id, value: @post.id %>
+            </div>
+            <div class="flex flex-col">
+                <span class="mb-2">
+                    <%= form.label :comment %>
+                </span>
+                <%= form.text_area :text %>
+                <span class="mt-2 self-end border-2 py-2 px-3">
+                    <%= form.submit 'Add Comment' %>
+                </span>
+            </div>
+        <% end %>
+    </div>
 </div>
+
