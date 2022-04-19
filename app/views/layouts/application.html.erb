@@ -15,7 +15,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
-  <body>
+    <body class = "container">
+    <nav class="navbar navbar-light bg-light mb-3">
+      <span class="navbar-brand mb-0 h1 pl-4 lead"><h1><%= link_to "BLOG", root_path, class: "nav-link text-info" %></h1></span>
+    </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <!-- To be placed by partner -->
+      <div id="user_nav">
+        <% if user_signed_in? %>
+            Signed in as <%= current_user.email %>. 
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <% else %>
+            <%= link_to "Register", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+        <% end %>
+        </div>
+      <!-- end -->
     <%= yield %>
   </body>
 </html>
