@@ -76,8 +76,8 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'cancancan', '~> 3.3'
 gem 'devise'
 gem 'image_magick', '~> 0.1.9'
 gem 'mini_magick'
 gem 'tailwindcss-rails', '~> 2.0'
-gem 'cancancan', '~> 3.3'
