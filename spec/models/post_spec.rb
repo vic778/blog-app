@@ -1,49 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe 'validations' do
-    user = User.create(name: 'victor', bio: 'lorem ipsum lorem .', posts_counter: 0)
-    subject do
-      Post.new(title: 'last one by Victor', text: 'claps lololololo ', author: user, comments_counter: 2,
-               likes_counter: 2)
+  before(:each) do
+    @user = User.new(name: 'John', bio: 'I am a content creator', photo: '', posts_counter: 0)
+    @post = Post.new(title: 'Post 1', text: 'Text...', comments_counter: 0, likes_counter: 0, author_id: @user.id)
+    10.times { |i| Comment.new(text: "Comment #{i}", author_id: @user.id, post_id: @post.id) }
+
+    @comments = Comment.where(post_id: @post.id).where(author_id: @user.id).all
+  end
+
+  describe 'user validation tests' do
+    it 'validates the presence of the title' do
+      @post.title = nil
+      expect(@post).to_not be_valid
     end
 
-    before { subject.save }
-
-    it 'title should be present' do
-      subject.title = nil
-      expect(subject).to_not be_valid
+    it 'validates the presence of the comments_counter' do
+      @post.comments_counter = nil
+      expect(@post).to_not be_valid
     end
 
-    it 'title should not be greater than 250 characters' do
-      subject.title = 'Hello'
-      expect(subject).to be_valid
+    it 'validates the numericality of the comments_counter' do
+      @post.comments_counter = 'comment'
+      expect(@post).to_not be_valid
     end
 
-    it 'comments counter should be integer' do
-      subject.comments_counter = 2
-      expect(subject).to be_valid
+    it 'validates the presence of the likes_counter' do
+      @post.likes_counter = nil
+      expect(@post).to_not be_valid
     end
 
-    it 'comments counter should be greater than or equal to 0' do
-      subject.comments_counter = -1
-      expect(subject).to_not be_valid
+    it 'validates the numericality of the likes_counter' do
+      @post.likes_counter = '1'
+      expect(@post).to_not be_valid
     end
 
-    it 'likes counter should be greater than or equal to 0' do
-      subject.likes_counter = -1
-      expect(subject).to_not be_valid
+    it 'validates the presence of the author_id' do
+      @post.author_id = nil
+      expect(@post).to_not be_valid
     end
+  end
 
-    it 'likes should be integer' do
-      subject.likes_counter = 2.2
-      expect(subject).to_not be_valid
-    end
-
-    describe 'should test post model' do
-      it 'render recent comments' do
-        expect(subject.recent_comments).to eq(subject.comments.last(5))
-      end
+  describe 'post model methods tests' do
+    it 'returns the last 5 comments' do
+      expect(@post.most_recent_comments).to eq(@comments.order('created_at DESC').limit(5))
     end
   end
 end

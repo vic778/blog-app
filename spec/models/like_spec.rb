@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  describe 'Validations' do
-    subject { Like.new(author_id: 6, post_id: 1) }
+  before(:each) do
+    @user = User.new(id: 1, name: 'Fred', bio: 'I am a content creator', photo: '', posts_counter: 0)
+    @like = Like.new(author_id: @user.id, post_id: @user.id)
+  end
 
-    before { subject.save }
-
-    it 'author id should be an integer' do
-      subject.author_id = 'a'
-      expect(subject).to_not be_valid
+  describe 'validation tests' do
+    it 'validates the author_id is an integer' do
+      @like.author_id = 1
+      expect(@like.author_id).to eq(1)
     end
 
-    it 'post id should be an integer' do
-      subject.post_id = 'b'
-      expect(subject).to_not be_valid
+    it 'validates the post_id is an integer' do
+      @like.post_id = 1
+      expect(@like.post_id).to eq(1)
     end
   end
 end
