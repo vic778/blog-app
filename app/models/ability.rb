@@ -22,6 +22,5 @@ class Ability
         like.author_id == user.id
       end
     end
- 
   end
 end
