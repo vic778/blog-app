@@ -55,7 +55,9 @@
             </div>
         <% end %>
     </div>
-     <p><%= @post.text %> </p>
+      <% if can? :destroy, @post %>
+      <%= button_to "Delete", user_post_path(@current_user.id, @post.id), method: :delete, data: {disable_with: "Deleting..."}, class: "btn btn-danger mb-3"%>
+      <% end %>
     
      
 </div>
