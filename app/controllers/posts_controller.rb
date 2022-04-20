@@ -28,6 +28,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+    @post = @user.posts.find(params[:id])
+    @post.comments.destroy_all
+    @post.likes.destroy_all
+    @post.destroy
+    redirect_to user_posts_path(@post.author), notice: 'Post deleted'
+  end
+
   private
 
   def post_params
