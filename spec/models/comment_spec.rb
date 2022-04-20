@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  describe 'Validations' do
-    subject { Comment.new(text: 'This is test case', author_id: 5, post_id: 3) }
+  before(:each) do
+    @user = User.new(id: 1, name: 'Fred', bio: 'I am a content creator', photo: '', posts_counter: 0)
+    @comment = Comment.new(text: 'Nice Post', author_id: @user.id, post_id: @user.id)
+  end
 
-    before { subject.save }
-
-    it 'title should not be valid' do
-      subject.text = nil
-      expect(subject).to_not be_valid
+  describe 'validation tests' do
+    it 'validates the author_id is an integer' do
+      @comment.author_id = 1
+      expect(@comment.author_id).to eq(1)
     end
 
-    it 'author id should be a number' do
-      subject.author_id = 'a'
-      expect(subject).to_not be_valid
+    it 'validates the post_id is an integer' do
+      @comment.post_id = 1
+      expect(@comment.post_id).to eq(1)
     end
 
-    it 'post id should be a number' do
-      subject.post_id = 'look'
-      expect(subject).to_not be_valid
+    it 'validates the comment text' do
+      expect(@comment.text).to eq('Nice Post')
     end
   end
 end
