@@ -17,6 +17,7 @@ RSpec.feature 'User Index', type: :feature do
     click_button 'Log in'
     find("a[href='#{user_path(@user2.id)}']").click
     find("a[href='#{user_posts_path(@user2.id)}']").click
+    expect(page).to have_content "Number of posts: #{@user2.posts.size}"
   end
 
   scenario "I can see the user's username." do
@@ -72,6 +73,7 @@ RSpec.feature 'User Index', type: :feature do
     click_button 'Log in'
     find("a[href='#{user_path(@user2.id)}']").click
     find("a[href='#{user_posts_path(@user2.id)}']").click
+    expect(page).to have_content "Number of posts: #{@user2.posts.size}"
   end
 
   scenario " can see some of the post's body." do
@@ -133,6 +135,7 @@ RSpec.feature 'User Index', type: :feature do
     click_button 'Log in'
     find("a[href='#{user_path(@user2.id)}']").click
     find("a[href='#{user_posts_path(@user2.id)}']").click
+    expect(page).to have_content "Number of posts: #{@user2.posts.size}"
   end
 
   scenario ' can see how many likes a post has.' do
