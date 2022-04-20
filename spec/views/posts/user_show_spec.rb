@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature 'User Index', type: :feature do
   background { visit new_user_session_path }
 
-  scenario "It should render the title of each post." do
+  scenario 'It should render the title of each post.' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -26,7 +26,7 @@ RSpec.feature 'User Index', type: :feature do
 
   scenario 'It should rend the author.' do
     @user1 = User.create(name: 'Victor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
-                         photo: 'http/url/image', bio: "Rails becomes good lool!")
+                         photo: 'http/url/image', bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -47,7 +47,7 @@ RSpec.feature 'User Index', type: :feature do
   scenario 'It should render the number of comments .' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -64,13 +64,12 @@ RSpec.feature 'User Index', type: :feature do
     find("a[href='#{user_path(@user2.id)}']").click
     find("a[href='#{user_posts_path(@user2.id)}']").click
     find("a[href='#{user_post_path(@user2.id, @post.id)}']").click
-  
   end
 
   scenario 'It should render the number of likes.' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -86,13 +85,12 @@ RSpec.feature 'User Index', type: :feature do
     find("a[href='#{user_path(@user2.id)}']").click
     find("a[href='#{user_posts_path(@user2.id)}']").click
     find("a[href='#{user_post_path(@user2.id, @post.id)}']").click
-  
   end
 
   scenario 'It should render the body of the post.' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -114,7 +112,7 @@ RSpec.feature 'User Index', type: :feature do
   scenario 'It should render the username of each commentor.' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
@@ -141,7 +139,7 @@ RSpec.feature 'User Index', type: :feature do
   scenario 'It should render each commentor .' do
     @user1 = User.create(name: 'VIctor', email: 'barhvictor@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image',
-                         bio: "Rails becomes good lool!")
+                         bio: 'Rails becomes good lool!')
     @user2 = User.create(name: 'Rails', email: 'rails@gmail.com', password: 'railsrails', confirmed_at: Time.now,
                          photo: 'http/url/image', bio: 'Rails forever')
 
