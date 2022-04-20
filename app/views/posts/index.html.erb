@@ -9,14 +9,12 @@
     </div>
     <div>
         <ul>
-        <% if can? %>
             <% @user_posts.each_with_index do |post,index| %>
                 <li class="my-5">
                     <%= render partial: "partials/postCard", locals:{ post: post, index:index } %>
                     <%= render partial: "partials/commentCard", locals:{ comments: post.comments } %>
                 </li>
             <% end %>
-            <%end%>
         </ul>
     </div>
     <div class="flex justify-center">
