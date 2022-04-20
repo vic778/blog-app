@@ -1,0 +1,14 @@
+
+<div class="flex w-full">
+    <div class="mr-7">
+        <%= image_tag 'https://placekitten.com/200/200' %>
+    </div>
+    <div class="relative flex flex-col justify-center text-gray-700 border-2 w-full pl-5">
+        <div class="text-2xl font-bold">
+            <%= link_to "#{user.name}", user %>
+        </div>
+        <div class="absolute bottom-5 right-5 extra-bold text-xl font-medium">
+            <%= "Number of posts: #{user.posts_counter || 0}" %>
+        </div>
+    </div>
+</div> 

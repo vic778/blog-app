@@ -1,46 +1,28 @@
-<h2 class='heading'>Profile of user number <%= params[:id] %></h2>
-<div class='users-body'>
-    <div class='u-detail-top'>
-        <div class='u-d-img'>
-           <img src="<%= @user.photo %>" class="rounded float-start rounded border img-thumbnail" width = "150px" alt="User image">
-        </div>
-        
-        <div class='u-detail-user'>
-            <h1 class='u-detail-user-name'>
-                <%= @user.name  %>
-            </h1>
-            <p class='u-detail-user-counter'>
-                Number of posts: <%= @user.posts_counter %>
-            </p>
-        </div>
-    </div>
 
-    <div class='u-detail-bio'>
-        <h2>Bio</h2>
-        <p>
+<div class="w-full block">
+    <%= render partial: "partials/userCard", locals: { user: @user } %>
+
+    <div class="border-2 w-full my-5 px-3 pt-3 pb-5">
+        <h2 class="text-xl font-medium">Bio</h2>
+        <p class="mt-5">
             <%= @user.bio %>
         </p>
     </div>
 
-    <div class='u-detail-rec-posts'>
-        <% @user.recent_posts.each  do |post| %>
-            <div class='u-detail-rec-posts-card'>
-                <%= link_to user_post_path(@user.id, post.id), id: "user_post#{post.id}" do %>
-                     <h4 class="py-4"><%= post.title %></h4>
-                <% end %>
-                <p>
-                    <%= post.text %>
-                </p>
+    <div class="mt-7">
+        <ul>
+            <% @user.most_recent_posts.each_with_index do |post,index| %>
+                <li class="my-5">
+                    <%= render partial: "partials/postCard", locals:{ post: post, index:index } %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 
-                <div class='com-lik-counters'>
-                    <p>Comments: <%= post.comments_counter %></p>
-                    <p>Likes: <%= post.comments_counter%></p>
-                </div>
-            </div>
-        <% end %>
-
-        <button class='all-posts-btn'>
-            <%= link_to 'See all posts', user_posts_path(@user)%>
+    <div class="flex justify-center">
+        <button class=" border-2 px-4 ">
+            <%= link_to "See all posts", user_posts_path(@user) %>
         </button>
     </div>
 </div>
+

@@ -1,0 +1,16 @@
+<div class="relative border-2 w-full  px-3 pt-3 pb-5">
+    <h2 class="text-xl font-medium">
+        <%= link_to "Post ##{index + 1}", user_post_path(@user.id, post.id) %>
+    </h2>
+    <p class="mt-5">
+        <%= post.text %>
+    </p>
+    <div class="absolute bottom-5 right-5 extra-bold text-xl font-medium">
+        <small>
+            <%= "comments: #{post.comments_counter || 0}" %>
+        </small>
+        <small class="ml-2">
+            <%= "Likes: #{post.likes_counter || 0}" %>
+        </small>
+    </div>
+</div>

@@ -1,44 +1,25 @@
-<h1>All Posts</h1>
-
-<div>
-  <ul>
-      <div>
-            <img src="<%= @user.photo %>" class="rounded float-start rounded border img-thumbnail" width = "150px" height = "150px" alt="User image">
-        </div>
-        <div class="border border-2 border-dark container mt-5 p-6">
-        <h2> <%= @user.name %> </h2>
-        <p class="float ">posts: <%= @user.posts.length %> </p>
-        </div>
-        
-    <% @user.posts.each do |p| %>
-     
-      <br>
-      <br>
-      <br>
-        <div class="border border-3 border-dark container mt-5 p-2 bio">
-          <%= link_to user_post_path(@user.id, p.id), id: "user_post#{p.id}" do %>
-          <h4><%= p.title%></h4>
-          <% end %>
-          <p><%= p.text%></p>
-          <div>
-            <span>Comments: <%= p.comments.size %></span>
-            <span>Comments: <%=p.likes_counter%></span>
-            
-          </div>
-        </div>
-        <div>
-        <% unless p.comments.empty? %>
-          <ul class="border border-3 border-dark container p-2 mt-1 bio">
-            <% p.recent_comments.each do |c| %>
-            <li><%= c.author.name %>: <%= c.text%></li>
+<div class="w-full">
+    <div class="mb-5">
+        <%= render partial: "partials/userCard", locals: { user: @user } %>
+    </div>
+    <div class="w-full flex justify-end ">
+        <button type="button" class="border-2 text medium py-2 px-4">
+            <%= link_to "Add Post", new_user_post_path %>
+        </button>
+    </div>
+    <div>
+        <ul>
+            <% @user_posts.each_with_index do |post,index| %>
+                <li class="my-5">
+                    <%= render partial: "partials/postCard", locals:{ post: post, index:index } %>
+                    <%= render partial: "partials/commentCard", locals:{ comments: post.comments } %>
+                </li>
             <% end %>
-          </ul>
-        <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-    <%= link_to "Add New Post", new_user_post_path(@user), class:"btn btn-secondary" %>
-  <br>
-  <button class="btn btn-primary">Pagination</button>
+        </ul>
+    </div>
+    <div class="flex justify-center">
+        <button class=" border-2 px-4 ">
+            Pagination
+        </button>
+    </div>
 </div>
