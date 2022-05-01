@@ -5,6 +5,9 @@
 This API is made of three models:
 - User model
 - Post model
+- Comment model
+- Like model 
+- Ability model 
 
 
 The API has the following endpoints:
@@ -20,15 +23,15 @@ allows user to create an account
 
 returns all the posts
 
-`GET / posts`
+`GET /users/id/posts`
 
 allows admin to create an post
 
-`POST /posts/new`
+`POST /users/id/posts/new`
 
 returns a specific post
 
-`GET /posts/id`
+`GET /users/id/posts/id`
 
 ## Built With
 
@@ -61,6 +64,9 @@ start the local server by running `rails s`
 ### Testing
 
 run the tests by typing `bundle exec rspec`
+
+### Rubocoop
+run the tests by typing `rubocop --color`
 
 ### Deployment
 
